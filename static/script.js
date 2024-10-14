@@ -6,6 +6,9 @@ document
     let formData = new FormData();
     formData.append("image", event.target.files[0]);
 
+    // Ghi log URL gửi yêu cầu
+    console.log("Sending request to:", `${BASE_URL}/upload`);
+
     // Gửi yêu cầu upload ảnh lên server
     fetch(`${BASE_URL}/upload`, { // Cập nhật URL
       method: "POST",

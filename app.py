@@ -2,8 +2,10 @@ import os
 from flask import Flask, render_template, request, jsonify, send_file, send_from_directory
 import cv2
 import numpy as np
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)  # Cho phép tất cả nguồn
 
 UPLOAD_FOLDER = 'static/uploads/'
 PROCESSED_FOLDER = 'static/processed/'
