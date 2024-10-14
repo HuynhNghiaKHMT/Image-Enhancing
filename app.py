@@ -17,9 +17,7 @@ os.makedirs(PROCESSED_FOLDER, exist_ok=True)
 # Render trang HTML
 @app.route('/')
 def index():
-    # return render_template('index.html') # Nếu bỏ file html trong thư mục templates
     return send_from_directory('.', 'index.html')  # Trỏ đến file index.html ở thư mục hiện tại
-
 
 # Upload ảnh
 @app.route('/upload', methods=['POST'])
@@ -31,9 +29,11 @@ def upload_image():
     if file.filename == '':
         return jsonify({'error': 'Không có file nào được chọn'}), 400
     
+    # Lưu file vào thư mục uploads
     file_path = os.path.join(UPLOAD_FOLDER, file.filename)
     file.save(file_path)
     
+    # Trả về đường dẫn của ảnh đã upload
     return jsonify({'file_path': '/' + file_path})
 
 # Xử lý ảnh
@@ -69,9 +69,11 @@ def process_image():
     elif process_type == 'edge_canny':
         image = detect_canny(image)
 
-    processed_image_path = os.path.join(PROCESSED_FOLDER, os.path.basename(image_path))
+    # Lưu ảnh đã xử lý
+    processed_image_path = os.path.join(PROCESSED_FOLDER, 'processed_' + os.path.basename(image_path))
     cv2.imwrite(processed_image_path, image)
 
+    # Trả về đường dẫn của ảnh đã xử lý
     return jsonify({'processed_image_path': '/' + processed_image_path})
 
 # Tải ảnh đã xử lý
@@ -123,7 +125,6 @@ def sharpen_unsharp(image):
     return unsharp
 
 def sharpen_highpass(image):
-
     image = image.astype(np.float32)
     blurred = cv2.GaussianBlur(image, (9, 9), 10.0)
     high_pass = cv2.subtract(image, blurred)

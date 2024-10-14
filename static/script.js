@@ -1,56 +1,48 @@
 const BASE_URL = "https://l85sgcpw-5000.asse.devtunnels.ms"; // Thay thế bằng URL Dev Tunnels của bạn
 
-document
-  .getElementById("upload-image")
-  .addEventListener("change", function (event) {
-    let formData = new FormData();
-    formData.append("image", event.target.files[0]);
+document.getElementById("upload-image").addEventListener("change", function (event) {
+  let formData = new FormData();
+  formData.append("image", event.target.files[0]);
 
-    // Ghi log URL gửi yêu cầu
-    console.log("Sending request to:", `${BASE_URL}/upload`);
+  // Ghi log URL gửi yêu cầu
+  console.log("Sending request to:", `${BASE_URL}/upload`);
 
-    // Gửi yêu cầu upload ảnh lên server
-    fetch(`${BASE_URL}/upload`, { // Cập nhật URL
-      method: "POST",
-      body: formData,
+  // Gửi yêu cầu upload ảnh lên server
+  fetch(`${BASE_URL}/upload`, { // Cập nhật URL
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.error) {
+        console.error("Error:", data.error);
+      } else {
+        // Cập nhật ảnh preview
+        document.getElementById("image").src = data.file_path; // Đường dẫn tới ảnh đã tải lên
+        document.getElementById("original-image").src = data.file_path; // Đường dẫn tới ảnh gốc
+        document.getElementById("image").dataset.filePath = data.file_path; // Lưu đường dẫn vào dataset
+
+        // Xóa ảnh đã xử lý cũ
+        document.getElementById("processed-image").src = ""; // Làm trống ảnh đã xử lý
+
+        // Xóa thanh kéo cũ nếu có
+        let existingSlider = document.querySelector(".comparison-slider");
+        if (existingSlider) {
+          existingSlider.remove();
+        }
+
+        // Reset vị trí thanh kéo và chiều rộng của ảnh đã xử lý
+        let comparisonResize = document.querySelector(".comparison-resize");
+        if (comparisonResize) {
+          comparisonResize.style.width = "50%"; // Đặt lại width về 50%
+        }
+
+        // Tạo lại thanh kéo mới
+        initComparison();
+      }
     })
-      .then((response) => {
-        // Kiểm tra nếu phản hồi không thành công
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then((data) => {
-        if (data.error) {
-          console.error("Error:", data.error);
-        } else {
-          // Cập nhật ảnh preview
-          document.getElementById("image").src = data.file_path;
-          document.getElementById("original-image").src = data.file_path;
-          document.getElementById("image").dataset.filePath = data.file_path;
-
-          // Xóa ảnh đã xử lý cũ
-          document.getElementById("processed-image").src = ""; // Làm trống ảnh đã xử lý
-
-          // Xóa thanh kéo cũ nếu có
-          let existingSlider = document.querySelector(".comparison-slider");
-          if (existingSlider) {
-            existingSlider.remove();
-          }
-
-          // Reset vị trí thanh kéo và chiều rộng của ảnh đã xử lý
-          let comparisonResize = document.querySelector(".comparison-resize");
-          if (comparisonResize) {
-            comparisonResize.style.width = "50%"; // Đặt lại width về 50%
-          }
-
-          // Tạo lại thanh kéo mới
-          initComparison();
-        }
-      })
-      .catch((error) => console.error("Error:", error));
-  });
+    .catch((error) => console.error("Error:", error));
+});
 
 function addNoise(type) {
   processImage(type + "_noise");
@@ -72,7 +64,6 @@ function processImage(processType) {
   let imagePath = document.getElementById("image").dataset.filePath;
 
   // Gửi yêu cầu xử lý ảnh lên server
-  console.log("Sending process request to:", `${BASE_URL}/process`); // Log URL
   fetch(`${BASE_URL}/process`, { // Cập nhật URL
     method: "POST",
     headers: {
@@ -83,21 +74,15 @@ function processImage(processType) {
       image_path: imagePath,
     }),
   })
-    .then((response) => {
-      // Kiểm tra nếu phản hồi không thành công
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
+    .then((response) => response.json())
     .then((data) => {
-      console.log("Response data:", data); // Kiểm tra toàn bộ phản hồi
+      console.log("Response data:", data);
       if (data.error) {
         console.error("Error:", data.error);
       } else {
-        console.log("Processed image path:", data.processed_image_path); // Kiểm tra đường dẫn
+        console.log("Processed image path:", data.processed_image_path);
         document.getElementById("processed-image").src =
-          data.processed_image_path + "?t=" + new Date().getTime();
+          data.processed_image_path + "?t=" + new Date().getTime(); // Cập nhật ảnh đã xử lý
       }
     })
     .catch((error) => console.error("Error:", error));
