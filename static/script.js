@@ -14,7 +14,13 @@ document
       method: "POST",
       body: formData,
     })
-      .then((response) => response.json())
+      .then((response) => {
+        // Kiểm tra nếu phản hồi không thành công
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then((data) => {
         if (data.error) {
           console.error("Error:", data.error);
@@ -66,6 +72,7 @@ function processImage(processType) {
   let imagePath = document.getElementById("image").dataset.filePath;
 
   // Gửi yêu cầu xử lý ảnh lên server
+  console.log("Sending process request to:", `${BASE_URL}/process`); // Log URL
   fetch(`${BASE_URL}/process`, { // Cập nhật URL
     method: "POST",
     headers: {
@@ -76,7 +83,13 @@ function processImage(processType) {
       image_path: imagePath,
     }),
   })
-    .then((response) => response.json())
+    .then((response) => {
+      // Kiểm tra nếu phản hồi không thành công
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
     .then((data) => {
       console.log("Response data:", data); // Kiểm tra toàn bộ phản hồi
       if (data.error) {
