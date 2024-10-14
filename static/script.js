@@ -1,3 +1,5 @@
+const BASE_URL = "https://l85sgcpw-5000.asse.devtunnels.ms"; // Thay thế bằng URL Dev Tunnels của bạn
+
 document
   .getElementById("upload-image")
   .addEventListener("change", function (event) {
@@ -5,7 +7,7 @@ document
     formData.append("image", event.target.files[0]);
 
     // Gửi yêu cầu upload ảnh lên server
-    fetch("/upload", {
+    fetch(`${BASE_URL}/upload`, { // Cập nhật URL
       method: "POST",
       body: formData,
     })
@@ -61,7 +63,7 @@ function processImage(processType) {
   let imagePath = document.getElementById("image").dataset.filePath;
 
   // Gửi yêu cầu xử lý ảnh lên server
-  fetch("/process", {
+  fetch(`${BASE_URL}/process`, { // Cập nhật URL
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -136,5 +138,5 @@ function initComparison() {
 
 function downloadImage() {
   let filePath = document.getElementById("image").src.split("/").pop();
-  window.location.href = "/download/" + filePath;
+  window.location.href = `${BASE_URL}/download/${filePath}`; // Cập nhật URL
 }
