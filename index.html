@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <link rel="shortcut icon" href="/static/image/Favicon.png" type="Computer Vision"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- font -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wdth,wght@0,75..100,300..800;1,75..100,300..800&family=Sora:wght@100..800&display=swap"/>
+
+    <!-- font icon -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+
+    <!-- reset css -->
+    <link rel="stylesheet" href="/static/reset.css" />
+    <!-- style css -->
+    <link rel="stylesheet" href="/static/style.css" />
+    <!-- responsive css -->
+    <link rel="stylesheet" href="/static/responsive.css" />
+
+    <title>Computer Vision</title>
+  </head>
+  <body>
+
+    <!-- header -->
+    <header class="menu">
+      <div class="container">
+        <div class="header">
+          <!-- Logo -->
+          <div class="box__logo">
+            <img src="/static/image/Logo.png" alt="Computer Science"
+              class="header__logo"/>
+          </div>
+
+          <!-- Title  -->
+          <div class="header__title">
+            <h1 class="heading-title">Image Enhancing</h1>
+          </div>
+        </div>
+      </div>
+    </header>
+
+     <!-- header -->
+    <main class="main">
+      <div class="container">
+
+        <!-- Upload Image -->
+        <div class="upload">
+          <label for="upload-image" class="upload-label">Upload Image</label>
+          <input type="file" id="upload-image" accept="image/*" style="display: none;" />
+        </div>
+        
+        <!-- Image Preview -->
+        <!-- <div class="container-image"> -->
+          <div id="image-preview" style="display: none">
+            <img id="image" src="" alt="" />
+          </div>
+        <!-- </div> -->
+        <!-- Comparison Container -->
+        
+        <div class="comparison-container">
+          <div class="container-image">
+            <div class="comparison-img">
+              <img id="original-image" src="" alt=""  />
+            </div>
+            <div class="comparison-resize">
+              <img id="processed-image" src="" alt="" />
+            </div>
+            <!-- Thanh kéo -->
+            <div class="comparison-slider"></div>
+          </div>
+        </div>
+
+        <!-- Processing Options -->
+        <div id="processing-options">
+          <div class="options">
+
+            <!-- Add Noise Options -->
+            <div class="addnoise">
+              <h3 class="heading-option">Add Noise</h3>
+              <div class="container-btn">
+                <button onclick="addNoise('gaussian')">Gaussian</button>
+              </div>
+              <div class="container-btn">
+                <button onclick="addNoise('salt_pepper')">Salt & Pepper </button>
+              </div>
+            </div>
+
+            <!-- Denoising Options -->
+            <div class="denoising">
+              <h3 class="heading-option">Denoising</h3>
+              <div class="container-btn">
+                <button onclick="denoise('mean')">Mean</button>
+              </div>
+              <div class="container-btn">
+                <button onclick="denoise('median')">Median</button>
+              </div>
+            </div>
+
+            <!-- sharpening Options -->
+            <div class="sharpening">
+              <h3 class="heading-option">Sharpening</h3>
+              <div class="container-btn">
+                <button onclick="sharpenImage('laplacian')">Laplacian</button>
+              </div>
+              <div class="container-btn">
+                <button onclick="sharpenImage('unsharp')">Unsharp Masking</button>
+              </div>
+              <div class="container-btn">
+                <button onclick="sharpenImage('highpass')">Highpass</button>
+              </div>
+            </div>
+
+            <!-- Edge Detection Options -->
+            <div class="edge-detection">
+              <h3 class="heading-option">Edge Detection</h3>
+              <div class="container-btn">
+                <button onclick="detectEdge('sobel')">Sobel</button>
+              </div>
+              <div class="container-btn">
+                <button onclick="detectEdge('prewitt')">Prewitt</button>
+              </div>
+              <div class="container-btn">
+                <button onclick="detectEdge('canny')">Canny</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Download Button -->
+        <div class="download">
+          <button id="download-btn" onclick="downloadImage()">Download Image</button>
+        </div>  
+      </div>
+    </main>
+
+    <!-- footer -->
+    <section class="footer">
+      <div class="container">
+        <div class="footer__vision">
+          <!-- vision -->
+          <div class="vision">
+            <!-- Logo -->
+            <div class="vision__logo">
+              <img src="/static/image/Favicon_Blue.svg" alt="Favicon_Blue" class="size__logo">
+              <h1 class="vision__heading">Computer Vision</h1>
+            </div>
+
+            <p class="vision__des">University of Information Technology</p>
+          </div>
+
+          <!-- avt -->
+          <div class="avt">
+            <!-- avt -->
+            <div class="avt__img">
+              <img
+                src="/static/image/Avatar.png"
+                alt="Computer Science"
+                class="shape__img"
+              />
+            </div>
+
+            <!-- content  -->
+            <h2 class="avt__heading">Huỳnh Trung Nghĩa</h2>
+            <p class="avt__des">Class: KHMT2022.3</p>
+            <p class="avt__des">ID: 22520945</p>
+          </div>
+
+          <!-- About -->
+          <div class="about">
+            <!-- contact -->
+            <div class="contact">
+              <h3 class="contact__heading">Contact</h3>
+              <p class="contact__des">Email: 22520945@gm.uit.edu.vn</p>
+              <p class="contact__des">Phone: 0943239751</p>
+            </div>
+
+            <!-- social -->
+            <div class="social">
+              <h3 class="social__heading">Social</h3>
+              <div class="icon">
+
+                <a href="https://web.facebook.com/profile.php?id=100056969404089">
+                  <img src="/static/image/Facebook.svg" alt="facebook" class="icon">
+                </a>
+
+                <a href="https://www.linkedin.com/in/ngh%C4%A9a-hu%E1%BB%B3nh-trung-b186212a5/">
+                  <img src="/static/image/Linkedin.svg" alt="linkedin" class="icon">
+                </a>
+                
+                <a href="https://github.com/HuynhNghiaKHMT">
+                  <img src="/static/image/Github.svg" alt="github" class="icon">
+                </a>
+
+                <a href="https://zalo.me/0943239751">
+                  <img src="/static/image/Zalo.svg" alt="zalo" class="icon">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="/static/script.js"></script>
+  </body>
+</html>

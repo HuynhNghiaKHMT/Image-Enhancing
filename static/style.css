@@ -1,0 +1,301 @@
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  font-size: 1.6rem;
+  font-family: "Sora", sans-serif;
+}
+:root {
+  --font-heading: "Sora";
+  --font-content: "Open Sans";
+  --primary-color: #21a9de;
+  --header-bg: #106;
+  --partners-bg: #f6fbff;
+}
+
+/* ========== common ========== */
+/* se co nhung the khong an theo thuoc tinh chung */
+input,
+textarea,
+select,
+button {
+  font-family: inherit;
+  font-size: inherit;
+}
+.container {
+  margin: 0 8%;
+}
+a {
+  text-decoration: none;
+}
+.btn:hover {
+  /* Lam mo nen */
+  opacity: 0.9;
+}
+.section-heading {
+  color: var(--header-bg);
+  font-size: 5rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -1px;
+}
+.section-desc {
+  color: #575f66;
+  font-size: 1.8rem;
+  font-weight: 300;
+  line-height: 1.67;
+}
+/* ========== header ========== */
+.menu {
+  background: var(--header-bg);
+}
+.header {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  gap: 50px;
+  align-items: center;
+  justify-content: space-between;
+}
+.header__logo {
+  width: 249.552px;
+  height: 80px;
+}
+.header__title {
+  color: #fff;
+  font-family: Sora;
+  font-size: 54px;
+  font-weight: 600;
+}
+
+/* ========== body ========== */
+.main{
+  text-align: center;
+}
+/* ========== Upload Image ========== */
+.upload{
+  padding: 30px 0 20px;
+}
+.upload-label {
+  background-color: #f0f0f0;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  border: 1px solid #106;
+  display: inline-block;
+}
+.upload-label:hover {
+  background-color: #e0e0e0;
+}
+
+/* ========== Image Preview ========== */
+.container-image{
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+
+}
+/* ========== Comparison Container  ========== */
+
+#image-preview {
+  margin: 20px 0;
+}
+
+img {
+  max-width: 400px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.comparison-container {
+  position: relative;
+  width: 400px;
+  height: 200px;
+  height: auto;
+  margin: 20px auto;
+  overflow: hidden;
+}
+
+.comparison-img img,
+.comparison-resize img {
+  width: 400px; /* Đảm bảo ảnh chiếm toàn bộ chiều rộng */
+  height: auto; /* Giữ chiều cao tự động để giữ tỷ lệ */
+  object-fit: cover;
+}
+
+.comparison-img {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.comparison-resize {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 2;
+}
+
+
+/* ========== Thanh kéo ========== */
+.comparison-slider {
+  position: absolute;
+  top: 0;
+  right: 50%;
+  width: 5px;
+  height: 100%;
+  background-color: #e0e0e0;
+  cursor: ew-resize;
+  z-index: 3;
+}
+
+/* ========== Processing Options ========== */
+.options{
+  width: 100%;
+  padding: 30px 0 30px;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+
+}
+.heading-option{
+  margin: 10px auto;
+  color: #106;
+  font-family: Poppins;
+  font-size: 25px;
+  font-weight: 600;
+}
+.container-btn{
+  width: 250px;
+}
+
+button {
+  display: inline-block;
+  width: 100%;
+  padding: 10px 10px;
+  margin: 5px;
+  border-radius: 5px;
+  border: 1px solid #106;
+  cursor: pointer;
+
+}
+
+
+/* ========== Download Button ========== */
+.download{
+  padding: 30px 0 60px;
+}
+#download-btn{
+  width: 300px;
+  border-radius: 10px;
+  padding: 10px;
+
+  font-family: Poppins;
+  font-size: 20px;
+  font-weight: 500;
+  background: #106;
+  color: #fff;
+}
+#download-btn:hover {
+  cursor: pointer;
+  background: #fff;
+  color: #106;
+}
+
+/* ========== footer ========== */
+.footer {
+  background: #106;
+}
+.footer__vision {
+  padding: 40px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ========== logo ========== */
+.vision__logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+}
+.vision__heading {
+  width: 267px;
+  color: #21a9de;
+  text-align: center;
+  font-family: Poppins;
+  font-size: 50px;
+  font-weight: 800;
+}
+.vision__des {
+  margin-top: 10px;
+  color: #fff;
+  text-align: center;
+  font-family: Sora;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+/* ========== avt ========== */
+.avt {
+  text-align: center;
+}
+.shape__img {
+  border: 3px solid rgb(255, 255, 255);
+  border-radius: 999px;
+}
+.avt__heading {
+  margin-top: 15px;
+  color: #fff;
+  font-family: Poppins;
+  font-size: 30px;
+  font-weight: 600;
+}
+.avt__des {
+  margin-top: 10px;
+  color: #fff;
+  font-family: Sora;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+/* ========== about ========== */
+.about {
+  margin: 0 70px 0;
+}
+.contact__heading,
+.social__heading {
+  padding: 10px 0;
+  color: #fff;
+  font-family: Poppins;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 30px; /* 116.667% */
+}
+.contact__des {
+  padding: 10px 0;
+  color: #fff;
+  font-family: Poppins;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 26px;
+}
+.icon {
+  display: flex;
+  justify-content: space-between;
+}
